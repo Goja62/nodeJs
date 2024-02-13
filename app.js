@@ -10,6 +10,7 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   console.log('In the anothet middleware!');
+  res.send('<h1>Hallo from Express</h1>');
 });
 
 const server = http.createServer(app);
