@@ -1,4 +1,5 @@
 const express = require('express');
+
 const path = require('path');
 const bodyParser = require('body-parser');
 
@@ -8,6 +9,7 @@ const admminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', admminRoutes);
 app.use(shopRoutes);
