@@ -5,13 +5,13 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const admminRoutes = require('./routes/admin');
+const admminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', admminRoutes);
+app.use('/admin', admminData.routes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
