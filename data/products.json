@@ -1,1 +1,9 @@
-[{"title":"Book","imageUrl":"https://thumbs.dreamstime.com/z/open-bible-876045.jpg","price":"36","description":"adfadef"}]
+[
+  {
+    "id": "12345",
+    "title": "Book",
+    "imageUrl": "https://thumbs.dreamstime.com/z/open-bible-876045.jpg",
+    "price": "36",
+    "description": "adfadef"
+  }
+]
