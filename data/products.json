@@ -1,1 +1,9 @@
-[{"id":"12345","title":"Book","imageUrl":"https://thumbs.dreamstime.com/z/open-bible-876045.jpg","price":"36","description":"New book"},{"id":"0.15380669943779712","title":"Book 2","imageUrl":"https://www.unesco.org/sites/default/files/styles/paragraph_medium_desktop/public/2022-05/shutterstock_728675914.jpeg","price":"22.12","description":"Second Book"}]
+[
+  {
+    "id": "12345",
+    "title": "Book",
+    "imageUrl": "https://thumbs.dreamstime.com/z/open-bible-876045.jpg",
+    "price": "36",
+    "description": "New book"
+  }
+]
