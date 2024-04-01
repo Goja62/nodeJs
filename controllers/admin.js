@@ -10,10 +10,10 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const product = new Product(title, imageUrl, price, description);
+  const imageUrl = req.body.imageUrl;
+  const product = new Product(title, price, description, imageUrl);
 
   product
     .save()
@@ -56,15 +56,15 @@ exports.postAddProduct = (req, res, next) => {
 exports.postEditProduct = (req, res, next) => {
   const prodId = req.body.productId;
   const updatedTitle = req.body.title;
-  const updatedImageUrl = req.body.imageUrl;
   const updatetPrice = req.body.price;
   const updatedDescription = req.body.description;
+  const updatedImageUrl = req.body.imageUrl;
   Product.findByPk(prodId)
     .then((product) => {
       product.title = updatedTitle;
-      product.imageUrl = updatedImageUrl;
       product.price = updatetPrice;
       product.description = updatedDescription;
+      product.imageUrl = updatedImageUrl;
       return product.save();
     })
     .then((result) => {
