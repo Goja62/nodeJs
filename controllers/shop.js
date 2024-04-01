@@ -6,7 +6,7 @@ exports.getProducts = (req, res, next) => {
       res.render('shop/product-list', {
         prods: products,
         pageTitle: 'Shop',
-        path: '/',
+        path: '/products',
       });
     })
     .catch((err) => {
@@ -27,7 +27,7 @@ exports.getProduct = (req, res, next) => {
   //   .catch((err) => {
   //     console.log(err);
   //   });
-  Product.findByPk(prodId)
+  Product.findById(prodId)
     .then((product) => {
       res.render('shop/product-detail', {
         product: product,
