@@ -85,7 +85,7 @@ class User {
     return this.getCart()
       .then((products) => {
         const order = {
-          item: products,
+          items: products,
           user: {
             _id: new ObjectId(this._id),
             name: this.name,
@@ -106,7 +106,10 @@ class User {
 
   getOrders() {
     const db = getDb();
-    // return db.collection('orders').find();
+    return db
+      .collection('orders')
+      .find({ 'user._id': new ObjectId(this._id) })
+      .toArray();
   }
 
   static findById(userId) {
