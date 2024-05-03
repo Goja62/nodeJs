@@ -46,6 +46,14 @@ exports.getSignup = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).render('auth/login', {
+      path: '/login',
+      pageTitle: 'Login',
+      errorMessage: errors.array()[0].msg,
+    });
+  }
   User.findOne({ email: email })
     .then((user) => {
       if (!user) {
@@ -88,30 +96,36 @@ exports.postSignup = (req, res, next) => {
       errorMessage: errors.array()[0].msg,
     });
   }
-
-  bcrypt
-    .hash(password, 12)
-    .then((hashedPassword) => {
-      const user = new User({
-        email: email,
-        password: hashedPassword,
-        cart: { items: [] },
-      });
-      return user.save();
-    })
-    .then((result) => {
-      res.redirect('/login');
-      return transporter
-        .sendMail({
-          to: email,
-          from: 'gortnar@beograd.com',
-          subject: 'Signup succsided',
-          html: '<h1>You successfully signd up!</h1>',
+  User.findOne({ email: email })
+    .then((userDoc) => {
+      if (userDoc) {
+        req.flash('error', 'E-mail exists alredy, please pick different one!');
+        return res.redirect('/signup');
+      }
+      return bcrypt
+        .hash(password, 12)
+        .then((hashedPassword) => {
+          const user = new User({
+            email: email,
+            password: hashedPassword,
+            cart: { items: [] },
+          });
+          return user.save();
+        })
+        .then((result) => {
+          res.redirect('/login');
+          return transporter.sendMail({
+            to: email,
+            from: 'gortnar@beograd.com',
+            subject: 'Signup succsided',
+            html: '<h1>You successfully signd up!</h1>',
+          });
         })
         .catch((err) => {
           console.log(err);
         });
     })
+
     .catch((err) => {
       console.log(err);
     });
