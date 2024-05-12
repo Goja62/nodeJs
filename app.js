@@ -28,6 +28,7 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
+const { error } = require('console');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -72,6 +73,10 @@ app.use(authRoutes);
 
 app.use('/500', errorController.get500);
 app.use(errorController.get404);
+
+app.use((error, req, res, next) => {
+  res.redirect('/500');
+});
 
 mongoose
   .connect(MONGODB_URI)
