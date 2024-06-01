@@ -1,0 +1,21 @@
+<%- include('../includes/head') %>
+<link rel="stylesheet" href="../css/cart.css" />
+<body>
+  <%- include('../includes/navigation') %>
+  <main>
+    <ul class="cart__item-list">
+      <% products.forEach(p => { %>
+      <li class="cart__item">
+        <h1>
+          <%= p.productId.title %>
+          <h2>Quantity: <%= p.quantity %></h2>
+        </h1>
+      </li>
+      <% }) %>
+    </ul>
+    <div>
+      <h2 class="centered">Total: <%= totalSum %></h2>
+    </div>
+  </main>
+  <%- include('../includes/end') %>
+</body>
